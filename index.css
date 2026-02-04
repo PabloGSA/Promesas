@@ -49,6 +49,20 @@ h1 {
     background: #5568d3;
 }
 
+#botonArea {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.estado-procesando {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
 #resultado {
     margin-top: 30px;
     text-align: left;
@@ -66,6 +80,20 @@ h1 {
 #resultado p.completo {
     background: #d4edda;
     border-left-color: #28a745;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#resultado p.error {
+    background: #f8d7da;
+    border-left-color: #dc3545;
+    color: #721c24;
+}
+
+#resultado p.incidencias {
+    background: #fff3cd;
+    border-left-color: #ffc107;
     font-weight: bold;
     text-align: center;
     margin-top: 20px;
