@@ -19,46 +19,23 @@ function entregarPlatillo(nombrePlatillo) {
     resultado.innerHTML += `<p>✅ ${nombrePlatillo} entregado</p>`;
 }
 
-function mostrarFallo(nombrePlatillo) {
-    console.log(`❌ No se pudo entregar ${nombrePlatillo}`);
-    const resultado = document.getElementById('resultado');
-    resultado.innerHTML += `<p class="error">❌ No se pudo entregar ${nombrePlatillo}</p>`;
-}
-
 async function procesarOrden(onCompletado) {
     const resultado = document.getElementById('resultado');
-    const fallos = [];
     try {
-        try {
-            const bebida = await prepararPlatillo('Bebida', 2000);
-            entregarPlatillo(bebida);
-        } catch (e) {
-            mostrarFallo('Bebida');
-            fallos.push('Bebida');
-        }
-        try {
-            const pizza = await prepararPlatillo('Pizza', 3000);
-            entregarPlatillo(pizza);
-        } catch (e) {
-            mostrarFallo('Pizza');
-            fallos.push('Pizza');
-        }
-        try {
-            const postre = await prepararPlatillo('Postre', 2000);
-            entregarPlatillo(postre);
-        } catch (e) {
-            mostrarFallo('Postre');
-            fallos.push('Postre');
-        }
-        if (fallos.length === 0) {
-            console.log('🎉 ¡Orden completa entregada!');
-            resultado.innerHTML += '<p class="completo">🎉 ¡Orden completa entregada!</p>';
-        } else {
-            console.log('⚠️ Orden entregada con incidencias');
-            resultado.innerHTML += '<p class="incidencias">⚠️ Orden con incidencias. No se entregó: ' + fallos.join(', ') + '</p>';
-        }
+        const bebida = await prepararPlatillo('Bebida', 2000);
+        entregarPlatillo(bebida);
+
+        const pizza = await prepararPlatillo('Pizza', 3000);
+        entregarPlatillo(pizza);
+
+        const postre = await prepararPlatillo('Postre', 2000);
+        entregarPlatillo(postre);
+
+        console.log('🎉 ¡Orden completa entregada!');
+        resultado.innerHTML += '<p class="completo">🎉 ¡Orden completa entregada!</p>';
     } catch (error) {
         console.error('Error al procesar la orden:', error);
+        resultado.innerHTML += '<p class="error">❌ No se puede entregar el platillo. Se canceló toda la orden.</p>';
     } finally {
         if (typeof onCompletado === 'function') {
             onCompletado();
